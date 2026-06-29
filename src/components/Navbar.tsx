@@ -14,6 +14,11 @@ import { navLinks } from '../constant';
 const Navbar: React.FC<{ page: string }> = ({ page }) => {
     const [open, setOpen] = useState(false);
 
+    // Normalize trailing slashes so e.g. "/competitions/" matches href "/competitions".
+    // (Astro serves directory-style URLs with a trailing slash, but navLinks omit it.)
+    const normalize = (p: string) => p.replace(/\/+$/, '') || '/';
+    const isActive = (href: string) => normalize(page) === normalize(href);
+
     return (
         <nav className="sticky top-0 z-50 w-full backdrop-blur-md
                     bg-white/80 dark:bg-gray-900/80 border-b border-gray-200/30
@@ -35,7 +40,7 @@ const Navbar: React.FC<{ page: string }> = ({ page }) => {
                         <li key={href}>
                             <a
                                 href={href}
-                                className={`transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${page.trim() === href.trim() ? 'text-indigo-600 dark:text-indigo-400' : ''
+                                className={`transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${isActive(href) ? 'text-indigo-600 dark:text-indigo-400' : ''
                                     }`}
                             >
                                 {label}
@@ -71,7 +76,7 @@ const Navbar: React.FC<{ page: string }> = ({ page }) => {
                         <li key={href}>
                             <a
                                 href={href}
-                                className={`block w-full py-1 transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${page === href ? 'text-indigo-600 dark:text-indigo-400' : ''
+                                className={`block w-full py-1 transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${isActive(href) ? 'text-indigo-600 dark:text-indigo-400' : ''
                                     }`}
                                 onClick={() => setOpen(false)}
                             >
