@@ -65,7 +65,7 @@ import { news } from '../constant';
         />
 
         <!-- Contact info -->
-        <ul class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 text-sm text-gray-200">
+        <ul class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 text-sm text-gray-700 dark:text-gray-300">
           <li class="flex items-center gap-2">
             <FiPhoneCall className="text-pink-400" />
             <a href="tel:+1312202925" class="hover:underline"
@@ -102,7 +102,7 @@ import { news } from '../constant';
       {news.slice(0, 4).map(({ date, text }) => (
         <li class="flex flex-col gap-2 py-3 md:flex-row md:gap-6">
           <span class="w-32 shrink-0 font-mono text-sm text-gray-400">{date}</span>
-          <span class="text-gray-100">{text}</span>
+          <span class="text-gray-700 dark:text-gray-300">{text}</span>
         </li>
       ))}
     </ul>
